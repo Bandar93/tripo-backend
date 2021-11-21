@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const errorHandler = require("./middleware/errorHandler");
 const tripRoutes = require("./apis/trips/trips.routers");
 
+// express and DB
 const app = express();
 connectDB();
 
@@ -22,5 +23,6 @@ app.use((req, res, next) => {
 });
 app.use(errorHandler);
 
+// Port
 const PORT = 8000;
 app.listen(PORT, () => console.log(`its Working ${PORT}`));
