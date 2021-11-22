@@ -30,8 +30,4 @@ exports.tripCreate = async (req, res, next) => {
       select: "username",
     });
 
-    return res.status(201).json(newTrip);
-  } catch (error) {
-    next(error);
-  }
-};
+
