@@ -17,13 +17,21 @@ exports.fetchTrip = async (tripId, next) => {
     next(error);
   }
 };
-// fetchTrip not fully tested till I have the create trip - Zainab
-//  Can't finish this till I have the 'User' model -Zainab
 
-// exports.tripCreate = async (req, res, next) => {
-//   try {
+exports.tripCreate = async (req, res, next) => {
+  try {
+    if (req.file) {
+      req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
+    }
+    req.body.owner = req.user._id;
+    const newTrip = await Trip.create(req.body);
+    await newTrip.populate({
+      path: "owner",
+      select: "username",
+    });
 
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+    return res.status(201).json(newTrip);
+  } catch (error) {
+    next(error);
+  }
+};

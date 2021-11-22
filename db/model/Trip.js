@@ -2,13 +2,14 @@ const mongoose = require("mongoose");
 const mongooseSlugPlugin = require("mongoose-slug-plugin");
 
 const TripSchema = mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
+  name: String,
   slug: String,
   image: String,
   description: String,
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 TripSchema.plugin(mongooseSlugPlugin, { tmpl: "<%=name%>" });
