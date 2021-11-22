@@ -3,9 +3,10 @@ const cors = require("cors");
 const connectDB = require("./db/database");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/errorHandler");
-const tripRoutes = require("./apis/trips/trips.routers");
-const userRoutes = require("./apis/user/users.routes");
+const tripRoutes = require("./apis/trips/trips.routes");
+const userRoutes = require("./apis/user/user.routes");
 const passport = require("passport");
+const { localStrategy , jwtStrategy } = require("./middleware/passport");
 
 // express and DB
 const app = express();
