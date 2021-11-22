@@ -4,10 +4,17 @@ const connectDB = require("./db/database");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/errorHandler");
 const tripRoutes = require("./apis/trips/trips.routers");
+const userRoutes = require("./apis/user/users.routes");
+const passport = require("passport");
 
 // express and DB
 const app = express();
 connectDB();
+
+//passport 
+app.use(passport.initialize());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 // Middleware
 app.use(cors());
@@ -16,6 +23,7 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/api/trips", tripRoutes);
+app.use("/api/", userRoutes);
 
 // Errors
 app.use((req, res, next) => {
