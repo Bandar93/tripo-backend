@@ -21,7 +21,8 @@ exports.fetchTrip = async (tripId, next) => {
 exports.tripCreate = async (req, res, next) => {
   try {
     if (req.file) {
-      req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
+      req.file.path = req.file.path.replace("\\", "/");
+      req.body.image = `/${req.file.path}`;
     }
     req.body.owner = req.user._id;
     const newTrip = await Trip.create(req.body);
