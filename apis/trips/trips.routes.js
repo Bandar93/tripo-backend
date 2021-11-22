@@ -1,5 +1,8 @@
 const express = require("express");
-const { tripListFetch, fetchTrip } = require("./trips.controllers");
+const { tripListFetch, fetchTrip , tripDelete, tripUpdate} = require("./trips.controllers");
+const passport = require("passport");
+
+
 
 // express
 const router = express.Router();
@@ -17,5 +20,10 @@ router.param("tripId", async (req, res, next, tripId) => {
 
 // Routers
 router.get("/", tripListFetch);
+
+router.delete("/:tripId",passport.authenticate("jwt", { session: false }), tripDelete);
+
+router.put("/:tripId", passport.authenticate("jwt", { session: false }), upload.single("image"), tripUpdate);
+
 
 module.exports = router;

@@ -27,3 +27,27 @@ exports.fetchTrip = async (tripId, next) => {
 //     next(error);
 //   }
 // };
+
+exports.tripDelete = async (req, res, next) => {
+  try {
+    const foundTrip = req.trip;
+
+    await foundTrip.destroy();
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.TripUpdate = async (req, res, next) => {
+  try {
+    //if (req.file) req.body.image = 
+
+    const foundTrip = req.trip;
+
+    await foundTrip.update(req.body);
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
