@@ -27,9 +27,9 @@ router.post(
   tripCreate
 );
 
-router.delete("/:tripId",passport.authenticate("jwt", { session: false }), tripDelete);
+// router.delete("/:tripId",passport.authenticate("jwt", { session: false }), tripDelete);
 
-router.put("/:tripId", passport.authenticate("jwt", { session: false }), upload.single("image"), tripUpdate);
+// router.put("/:tripId", passport.authenticate("jwt", { session: false }), upload.single("image"), tripUpdate);
 
 
 module.exports = router;
