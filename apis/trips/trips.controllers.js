@@ -36,3 +36,28 @@ exports.tripCreate = async (req, res, next) => {
    
   }}
 
+  exports.tripDelete = async (req, res, next) => {
+    try {
+      const foundTrip = req.trip;
+  
+      await foundTrip.remove();
+      res.status(204).end();
+    } catch (error) {
+      next(error);
+    }
+  };
+  
+  exports.tripUpdate = async (req, res, next) => {
+    try {
+      if (req.file) req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
+  
+      const foundTrip = req.trip;
+  
+      await foundTrip.update(req.body);
+      res.status(204).end();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+

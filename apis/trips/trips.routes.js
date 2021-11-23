@@ -1,5 +1,5 @@
 const express = require("express");
-const { tripListFetch, fetchTrip, tripCreate } = require("./trips.controllers");
+const { tripListFetch, fetchTrip, tripCreate,tripDelete,tripUpdate } = require("./trips.controllers");
 const passport = require("passport");
 const upload = require("../../middleware/multer");
 
@@ -27,9 +27,9 @@ router.post(
   tripCreate
 );
 
-// router.delete("/:tripId",passport.authenticate("jwt", { session: false }), tripDelete);
+router.delete("/:tripId",passport.authenticate("jwt", { session: false }), tripDelete);
 
-// router.put("/:tripId", passport.authenticate("jwt", { session: false }), upload.single("image"), tripUpdate);
+router.put("/:tripId", passport.authenticate("jwt", { session: false }), upload.single("image"), tripUpdate);
 
 
 module.exports = router;
