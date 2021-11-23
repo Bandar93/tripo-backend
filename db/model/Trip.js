@@ -3,6 +3,8 @@ const mongooseSlugPlugin = require("mongoose-slug-plugin");
 
 const TripSchema = mongoose.Schema({
   name: String,
+  // REVIEW: we dont have slugs in mobile apps, remove it
+
   slug: String,
   image: String,
   description: String,
@@ -12,6 +14,7 @@ const TripSchema = mongoose.Schema({
   },
 });
 
+// REVIEW: we dont have slugs in mobile apps, remove it
 TripSchema.plugin(mongooseSlugPlugin, { tmpl: "<%=name%>" });
 
 module.exports = mongoose.model("Trip", TripSchema);

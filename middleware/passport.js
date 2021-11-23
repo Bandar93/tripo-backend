@@ -1,34 +1,34 @@
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const User = require("../db/model/User");
-const JWTStrategy = require('passport-jwt').Strategy; 
-const { fromAuthHeaderAsBearerToken } = require('passport-jwt').ExtractJwt;
+const JWTStrategy = require("passport-jwt").Strategy;
+const { fromAuthHeaderAsBearerToken } = require("passport-jwt").ExtractJwt;
 const { JWT_SECRET } = require("../config/keys");
 
-exports.localStrategy = new LocalStrategy(async ( username, password, done ) => {
-    try {
-        const user = await User.findOne({ username: username });
+exports.localStrategy = new LocalStrategy(async (username, password, done) => {
+  try {
+    const user = await User.findOne({ username: username });
 
-        const passwordsMatch = user
-        ? await bcrypt.compare(password, user.password)
-        : false;
+    const passwordsMatch = user
+      ? await bcrypt.compare(password, user.password)
+      : false;
 
-        if (passwordsMatch) return done(null, user);
+    if (passwordsMatch) return done(null, user);
 
-        return done(null, false);
-    } catch (error) {
-        done(error);
-    }
-
+    return done(null, false);
+  } catch (error) {
+    done(error);
+  }
 });
 
-exports.jwtStrategy = new JWTStrategy({
-    
+exports.jwtStrategy = new JWTStrategy(
+  {
     jwtFromRequest: fromAuthHeaderAsBearerToken(),
     secretOrKey: JWT_SECRET,
   },
 
   async (payload, done) => {
+    // REVIEW: Remove console log
     console.log("hi", payload);
     if (Date.now() > payload.exp) {
       return done(null, false);

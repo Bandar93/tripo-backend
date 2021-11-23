@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  // REVIEW: Copy paste code, remove it
   //   recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipes" }],
   //   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Categories" }],
 });
