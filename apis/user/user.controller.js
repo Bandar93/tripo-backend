@@ -25,7 +25,7 @@ exports.signup = async (req, res, next) => {
       req.body.password = hashedPassword;
 
       const newUser = await User.create(req.body);
-      const profile = await Profile.create(req.body);
+      const profile = await Profile.create({user: newUser._id});
       const token = generateToken(newUser);
 
 
